@@ -6,7 +6,7 @@
 <input type="search" [value]="searchTerm$|async" (input)="onSearchTermChange($event)">
 
 <label for="sort">Sort</label>
-<select name="sort" id="sort" (change)="onSort($event)">
+<select name="sort" id="sort" (change)="onSort($event)" [value]="sortBy$|async">
   <option value="" disabled selected>Select</option>
   <option value="asc">Ascending</option>
   <option value="desc">Descending</option>

@@ -30,7 +30,7 @@ export class TravelServiceService {
 
   addDestination(destination: Pick<Destination, 'name' | 'date'>){
     const dests = this._destinations.value;
-    const id = dests[dests.length - 1].id + 1;
+    const id = dests.length ? dests[dests.length - 1].id + 1 : 1;
     this._destinations.next([...this._destinations.value, { ...destination, id }]);
   }
 

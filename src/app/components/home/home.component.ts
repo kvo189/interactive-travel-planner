@@ -11,7 +11,7 @@ import { Destination, TravelServiceService } from 'src/app/services/travel-servi
 export class HomeComponent implements OnInit {
 
   searchTerm$ = new BehaviorSubject<string>('');
-  sortBy$ = new BehaviorSubject<null | 'asc' | 'desc'>(null);
+  sortBy$ = new BehaviorSubject<"" | 'asc' | 'desc'>('asc');
 
   destinationForm = this.fb.group({
     name: [''],
@@ -45,9 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.travelService.getDestinations().subscribe((destinations) => {
-
-    });
+    this.travelService.getDestinations().subscribe();
   }
 
   addDestination() {
@@ -58,6 +56,7 @@ export class HomeComponent implements OnInit {
       name: this.name,
       date: this.date,
     })
+    this.destinationForm.reset();
   }
 
   removeDestination(id: number) {
@@ -70,7 +69,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSort(event: Event) {
-    const sort = (event.target as HTMLInputElement).value;
+    const sort = (event.target as HTMLSelectElement).value;
     this.sortBy$.next(sort === 'asc' ? 'asc' : 'desc');
   }
 
