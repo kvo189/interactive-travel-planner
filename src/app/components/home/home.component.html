@@ -1,0 +1,36 @@
+<h1>Home</h1>
+
+<h2>Destinations</h2>
+
+<label for="search">Search</label>
+<input type="search" [value]="searchTerm$|async" (input)="onSearchTermChange($event)">
+
+<label for="sort">Sort</label>
+<select name="sort" id="sort" (change)="onSort($event)">
+  <option value="" disabled selected>Select</option>
+  <option value="asc">Ascending</option>
+  <option value="desc">Descending</option>
+</select>
+
+<ul>
+  <li *ngFor="let d of destinations$|async">
+    Name: {{d.name}} <br>
+    Date: {{d.date}} <br>
+    <button (click)="removeDestination(d.id)">Remove</button>
+  </li>
+</ul>
+
+<h2>Add Destination</h2>
+<form action="" [formGroup]="destinationForm">
+  <div>
+    <label for="name">Name</label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+
+  <div>
+    <label for="date">Date</label>
+    <input id="date" type="date" formControlName="date">
+  </div>
+
+  <button (click)="addDestination()">Add</button>
+</form>
